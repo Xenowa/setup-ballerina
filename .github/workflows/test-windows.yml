@@ -8,6 +8,7 @@ on:
   workflow_dispatch:
     inputs:
       balVersion:
+        description: "Ballerina Version"
         default: 'latest'
 jobs:
   test_windows:
@@ -17,8 +18,8 @@ jobs:
       - name: Set env
         run: |-
           echo "balVersion=$(
-          if [[${{ github.event.inputs.balVersion }}]]; then
-            echo ${{ github.event.inputs.balVersion }}
+          if [[ -n "${{ inputs.balVersion }}" ]]; then
+            echo ${{ inputs.balVersion }}
           else
             echo 2201.3.2
           fi
